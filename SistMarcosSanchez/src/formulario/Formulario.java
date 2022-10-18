@@ -4,9 +4,12 @@
  */
 package formulario;
 
+import dao.Empleados;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelos.MEdad;
+import modelos.MEmpleado;
 
 /**
  *
@@ -19,6 +22,7 @@ public class Formulario extends javax.swing.JFrame {
      */
     MEdad Ed = new MEdad(0);
     DefaultListModel modelo = new DefaultListModel();
+    Empleados De = new Empleados();
 
     public Formulario() {
         initComponents();
@@ -57,7 +61,9 @@ public class Formulario extends javax.swing.JFrame {
         jBtnAgregarEmpleado = new javax.swing.JButton();
         jBtnSalario = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblEmp = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jTfSalario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,6 +132,11 @@ public class Formulario extends javax.swing.JFrame {
         });
 
         jBtnAgregarEmpleado.setText("Agregar");
+        jBtnAgregarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarEmpleadoActionPerformed(evt);
+            }
+        });
 
         jBtnSalario.setText("Aumentar Salario");
         jBtnSalario.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +145,7 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -142,7 +153,15 @@ public class Formulario extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTblEmp);
+
+        jLabel11.setText("Salario:");
+
+        jTfSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTfSalarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,18 +183,21 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBtnAgregarEmpleado)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnSalario))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBtnAgregarEmpleado)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBtnSalario)))
+                                    .addComponent(jTfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTfSalario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCmbCargo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
@@ -236,11 +258,15 @@ public class Formulario extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jTfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jCmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
+                            .addComponent(jLabel11)
+                            .addComponent(jTfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,7 +324,6 @@ public class Formulario extends javax.swing.JFrame {
                     jTfAlta.setText("" + Ed.getMayor());
                     jTfBaja.setText("" + Ed.getMenor());
                     jTfPromedio.setText("" + Ed.promedio());
-
                 }
 
             }
@@ -307,7 +332,11 @@ public class Formulario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jBtnAgregarEdadActionPerformed
-
+    private void llenarTabla() {
+        DefaultTableModel tbl = new DefaultTableModel();
+        tbl = De.getListEmp();
+        jTblEmp.setModel(tbl);
+    }
     private void jTfAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfAltaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTfAltaActionPerformed
@@ -330,7 +359,36 @@ public class Formulario extends javax.swing.JFrame {
 
     private void jBtnSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalarioActionPerformed
         // TODO add your handling code here:
+        for (MEmpleado emp: De.getRegistro()) {
+            emp.modificar_empleado();
+        }
+        llenarTabla();
     }//GEN-LAST:event_jBtnSalarioActionPerformed
+
+    private void jBtnAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarEmpleadoActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nom = jTfNombre.getText();
+            double sal = Double.parseDouble(jTfSalario.getText());
+            String cargo = jCmbCargo.getSelectedItem().toString();
+            if (sal <= 0) {
+                JOptionPane.showMessageDialog(this, ""
+                        + "El salario no es negativo", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                De.agregarEmpleado(sal, cargo, nom);
+                llenarTabla();
+            }
+            jTfNombre.setText("");
+            jTfSalario.setText("");            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_jBtnAgregarEmpleadoActionPerformed
+
+    private void jTfSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTfSalarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,6 +432,7 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCmbCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -386,11 +445,12 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTblEmp;
     private javax.swing.JTextField jTfAlta;
     private javax.swing.JTextField jTfBaja;
     private javax.swing.JTextField jTfEdad;
     private javax.swing.JTextField jTfNombre;
     private javax.swing.JTextField jTfPromedio;
+    private javax.swing.JTextField jTfSalario;
     // End of variables declaration//GEN-END:variables
 }
